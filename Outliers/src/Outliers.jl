@@ -39,7 +39,7 @@ function handlePreflight(req::HTTP.Request)
 	if ("JULIA_ENV" in keys(ENV))
 		if (ENV["JULIA_ENV"] == "PROD")
 			headers = [
-        		"Access-Control-Allow-Origin" => "https://showcases.sarem-seitz.com/anomalies/",
+        		"Access-Control-Allow-Origin" => "https://showcases.sarem-seitz.com",
         		"Access-Control-Allow-Methods" => "POST, OPTIONS",
 			"Access-Control-Allow-Headers" => "Content-Type"
     			]
