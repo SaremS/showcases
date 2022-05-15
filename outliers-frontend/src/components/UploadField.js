@@ -15,7 +15,7 @@ export default function UploadField({handleUpdate}) {
 
 		var xhr = new XMLHttpRequest();
 
-		if (NODE_ENV=="PROD"){
+		if (REACT_ENV=="PROD"){
 			xhr.open("POST", "https://api.sarem-seitz.com/anomalies/forecast",true)
 		}else{
 			xhr.open("POST", "http://localhost:8081/forecast",true);

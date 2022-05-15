@@ -7,7 +7,7 @@ COPY ./package.json ./showcases/package.json
 COPY ./package-lock.json ./showcases/package-lock.json
 COPY ./.env ./showcases/.env
 
-ENV NODE_ENV=PROD
+ENV REACT_ENV=PROD
 
 WORKDIR /showcases
 
