@@ -2,7 +2,7 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Papa from 'papaparse';
 
-const NODE_ENV = process.env.NODE_ENV;
+const REACT_ENV = process.env.REACT_ENV;
 
 export default function UploadField({handleUpdate}) {
   
