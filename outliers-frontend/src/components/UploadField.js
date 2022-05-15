@@ -14,8 +14,7 @@ export default function UploadField({handleUpdate}) {
 	function queryTsApi(inputArray){
 
 		var xhr = new XMLHttpRequest();
-		const REACT_ENV = process.env.REACT_ENV;
-		console.log(REACT_ENV);
+		const REACT_ENV = process.env.REACT_APP_REACT_ENV;
 		if (REACT_ENV=="PROD"){
 			xhr.open("POST", "https://api.sarem-seitz.com/anomalies/forecast",true)
 		}else{
