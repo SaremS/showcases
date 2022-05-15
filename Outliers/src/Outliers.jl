@@ -26,10 +26,17 @@ function fit_map(::Type{<:Normal}, observations, responsibilities)
     Normal(mu, sqrt(s2))
 end
 
+
+function getCorsHeaders()
+
+
+
+end
+
 function handlePreflight(req::HTTP.Request)
 	
 
-	if ("JULIA_ENV" in ENV)
+	if ("JULIA_ENV" in keys(ENV))
 		if (ENV["JULIA_ENV"] == "PROD")
 			headers = [
         		"Access-Control-Allow-Origin" => "https://showcases.sarem-seitz.com/anomalies/",
