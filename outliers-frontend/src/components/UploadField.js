@@ -2,7 +2,7 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Papa from 'papaparse';
 
-const REACT_ENV = process.env.REACT_ENV;
+
 
 export default function UploadField({handleUpdate}) {
   
@@ -14,7 +14,7 @@ export default function UploadField({handleUpdate}) {
 	function queryTsApi(inputArray){
 
 		var xhr = new XMLHttpRequest();
-
+		const REACT_ENV = process.env.REACT_ENV;
 		if (REACT_ENV=="PROD"){
 			xhr.open("POST", "https://api.sarem-seitz.com/anomalies/forecast",true)
 		}else{
