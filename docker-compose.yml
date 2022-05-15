@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+
+  showcases:
+    container_name: frontend
+    build:
+      context: ./outliers-frontend
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+
+  anomalies:
+    container_name: anomalies
+    build:
+      context: ./Outliers
+      dockerfile: Dockerfile
+    ports:
+      - '8081:8081'

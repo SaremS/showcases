@@ -1,0 +1,13 @@
+name = "Outliers"
+uuid = "fec68b08-0ab5-41f0-8c5f-8dd86f3e45ae"
+authors = ["saremseitz <sarem.seitz@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+ConjugatePriors = "1624bea9-42b1-5fc1-afd3-e96f729c8d6c"
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+HMMBase = "b2b3ca75-8444-5ffa-85e6-af70e2b64fe7"
+HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
+JSON3 = "0f8b85d8-7281-11e9-16c2-39a750bddbf1"
+StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
+StructTypes = "856f2bd8-1eba-4b0a-8007-ebc267875bd4"
