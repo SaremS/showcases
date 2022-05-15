@@ -6,5 +6,7 @@ RUN chmod a+x ./run_server.jl
 RUN chmod a+x ./install.jl
 RUN julia ./install.jl
 
+ENV JULIA_ENV=PROD
+
 EXPOSE 8081
 CMD julia ./run_server.jl

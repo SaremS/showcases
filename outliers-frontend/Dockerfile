@@ -6,7 +6,7 @@ COPY ./public/ ./showcases/public
 COPY ./package.json ./showcases/package.json
 COPY ./package-lock.json ./showcases/package-lock.json
 
-ENV NODE_ENV=production
+ENV NODE_ENV=PROD
 
 WORKDIR /showcases
 

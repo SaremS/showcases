@@ -27,15 +27,33 @@ function fit_map(::Type{<:Normal}, observations, responsibilities)
 end
 
 function handlePreflight(req::HTTP.Request)
-	println("Received CORS")
-	headers = [
-        	"Access-Control-Allow-Origin" => "*",
-        	"Access-Control-Allow-Methods" => "POST, OPTIONS",
-		"Access-Control-Allow-Headers" => "Content-Type"
-    	]
-    	# handle CORS requests
-    	
-        return HTTP.Response(200, headers)
+	
+
+	if ("JULIA_ENV" in ENV)
+		if (ENV["JULIA_ENV"] == "PROD")
+			headers = [
+        		"Access-Control-Allow-Origin" => "https://showcases.sarem-seitz.com/anomalies/",
+        		"Access-Control-Allow-Methods" => "POST, OPTIONS",
+			"Access-Control-Allow-Headers" => "Content-Type"
+    			]
+			return HTTP.Response(200, headers)
+		else
+			headers = [
+        		"Access-Control-Allow-Origin" => "http://localhost:3000",
+        		"Access-Control-Allow-Methods" => "POST, OPTIONS",
+			"Access-Control-Allow-Headers" => "Content-Type"
+    			]
+			return HTTP.Response(200, headers)
+		end
+	else
+			headers = [
+        		"Access-Control-Allow-Origin" => "http://localhost:3000",
+        		"Access-Control-Allow-Methods" => "POST, OPTIONS",
+			"Access-Control-Allow-Headers" => "Content-Type"
+    			]
+			return HTTP.Response(200, headers)
+	end
+
 end
 
 function handleData(req::HTTP.Request)
