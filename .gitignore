@@ -33,4 +33,7 @@ yarn-error.log*
 */target/
 */cache_pretrained/
 */.bloop
-*/.metals
+*/.metals/
+
+*/venv/
+
