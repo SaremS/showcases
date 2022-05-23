@@ -1,0 +1,25 @@
+name: Deploy frontend
+on:
+  push:
+    branches:
+    - master
+    paths:
+    - '/frontend/**'
+#test
+jobs:
+  deploy:
+    name: "Deploy frontend"
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    # needs: test
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.DEPLOY_HOST }}
+        username: ${{ secrets.DEPLOY_USER }}
+        password: ${{ secrets.DEPLOY_KEY }}
+        port: 22
+        script: /root/deploy_frontend.sh
+
+

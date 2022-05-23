@@ -24,3 +24,16 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+*/target/
+*/checkpoint/
+
+*/__pycache__/
+
+*/target/
+*/cache_pretrained/
+*/.bloop
+*/.metals/
+
+*/venv/
+

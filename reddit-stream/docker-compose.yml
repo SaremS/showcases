@@ -1,0 +1,96 @@
+version: '3'
+
+networks:
+  python-stream-network:
+    driver: bridge
+  spark-stream-network:
+    driver: bridge
+  middleware-network:
+    driver: bridge
+  kafka-zookeeper-network:
+    driver: bridge
+
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.0.1
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - kafka-zookeeper-network
+
+
+  broker:
+    image: confluentinc/cp-kafka:7.0.1
+    container_name: broker
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://broker:29092
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT_INTERNAL
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_LOG_RETENTION_HOURS: 1
+    networks:
+      - python-stream-network
+      - spark-stream-network
+      - middleware-network
+      - kafka-zookeeper-network
+    restart: on-failure
+
+
+  python-stream:
+    container_name: python-stream
+    depends_on:
+      - broker
+      - zookeeper
+    build:
+      context: ./python-stream
+      dockerfile: Dockerfile
+    networks:
+      - python-stream-network
+    env_file: ./python-stream/.env
+    restart: on-failure
+  
+
+  spark-stream:
+    container_name: spark-stream
+    depends_on:
+      - broker
+      - zookeeper
+      - python-stream
+    build:
+      context: ./sentiment-stream
+      dockerfile: Dockerfile
+    networks:
+      - spark-stream-network
+    env_file: ./sentiment-stream/.env
+    restart: on-failure
+    volumes:
+      - "./sentiment-stream/cache_pretrained:/root/streamer/cache_pretrained"
+
+
+  middleware:
+    container_name: middleware
+    depends_on:
+      - broker
+      - zookeeper
+      - python-stream
+      - spark-stream
+    build:
+      context: ./middleware
+      dockerfile: Dockerfile
+    networks:
+      - middleware-network
+    env_file: ./middleware/.env
+    restart: on-failure
+    ports:
+      - "8765:8765"
