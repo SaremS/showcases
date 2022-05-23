@@ -1,12 +1,14 @@
-name: CI
+name: Deploy frontend
 on:
   push:
     branches:
     - master
+    paths:
+    - '/frontend/**'
 #test
 jobs:
   deploy:
-    name: "Deploy to server"
+    name: "Deploy frontend"
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     # needs: test
@@ -18,4 +20,6 @@ jobs:
         username: ${{ secrets.DEPLOY_USER }}
         password: ${{ secrets.DEPLOY_KEY }}
         port: 22
-        script: /root/deploy_script.sh
+        script: /root/deploy_frontend.sh
+
+
