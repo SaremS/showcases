@@ -3,11 +3,14 @@ import './App.css';
 import MyAppBar from './components/MyAppBar';
 import ProAppBar from './components/ProAppBar';
 import Anomalies from './pages/Anomalies';
+import SentimentStream from './pages/SentimentStream';
 import Home from './pages/Home';
 import * as React from 'react';
 import './styles/App.scss';
 import MenuIcon from '@mui/icons-material/Menu'; 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import useWebSocket, { ReadyState } from 'react-use-websocket';
+
 
 const anomalies_preset = JSON.parse(
 	JSON.stringify(
@@ -18,18 +21,45 @@ const anomalies_preset = JSON.parse(
 function App() {
   
   const [state, setState] = React.useState({
-	  anomalies: anomalies_preset
+	  anomalies: anomalies_preset,
   }); 
-  
-  const [toggled, setToggled] = React.useState(false);
-  const handleToggleSidebar = (value) => {
-  	setToggled(value);
-  };
   
   function updateTsData(newValues, newProbs) {
 	setState({anomalies: {values: newValues, probabilities: newProbs}})
   }
 
+  const [toggled, setToggled] = React.useState(false);
+  const handleToggleSidebar = (value) => {
+  	setToggled(value);
+  };
+
+  
+
+  const [sentimentStreamState, setSentimentStreamState] = React.useState([]);
+
+  const REACT_ENV = process.env.REACT_APP_REACT_ENV;
+  var socketUrl = null
+  
+  if (REACT_ENV == "PROD"){
+  	const socketUrl = "wss://api.sarem-seitz.com/sentiment-stream/socket";
+  }else{
+	const socketUrl = "ws://localhost:5432";
+  }
+  const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl);
+
+  React.useEffect(() => {
+   
+	  
+    if (lastMessage !== null) {
+      const data = lastMessage.data;
+      const parsed = JSON.parse(data.substr(1,data.length-2).replaceAll('\\',''));
+      parsed["time"] = new Date(parsed["timestamp"] * 1000); 
+      setSentimentStreamState((prev) => prev.concat((parsed)));
+    console.log(sentimentStreamState)
+    }
+  }, [lastMessage, setSentimentStreamState]);
+
+  
   return (
     	<div className="app">
 	  	<BrowserRouter>
@@ -55,6 +85,14 @@ function App() {
 						updateState={updateTsData}
 	  				/>
 				}/>
+
+	  			<Route path="/sentiment-streaming" element={
+					<SentimentStream
+	  					state={sentimentStreamState}
+						updateState={1}
+	  				/>
+				}/>
+
 	  		</Routes>
 	  		
 	  	</main>

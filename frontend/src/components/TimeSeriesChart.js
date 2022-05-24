@@ -3,10 +3,14 @@ import * as React from 'react';
 
 
 export default function TimeSeriesChart({data}){
-	var chartData = [["Index", "Data"]];
+	var chartData = [["Time", "Sentiment"]];
 
-	for (let i = 1; i <= data.length; i++){
-		chartData.push([i, data[i]])
+	if (data.length == 0){
+		chartData.push([1,1 ])
+	}
+
+	for (let i = 0; i < data.length; i++){
+		chartData.push([data[i]["index"], data[i]["value"]])
 	};
 
 	const options = {
@@ -17,13 +21,19 @@ export default function TimeSeriesChart({data}){
 			duration: 500,
 			easing: "out",
 			startup: true
+		},
+		vAxis: {
+			viewWindow: {
+				min: -1.0,
+				max: 1.0
+			}
 		}
 	};
 	return(
 		<Chart
 			chartType="LineChart"
-			width="100%"
-			height="400px"
+			width="70vw"
+			height="40vh"
 			data={chartData}
 			options={options}
 		/>	
