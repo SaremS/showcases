@@ -26,9 +26,6 @@ export default function SentimentStream({state,updateState}){
 					</Paper>
 				</Grid>
 		
-				<Grid item xs={12}>
-					<UploadField handleUpdate={updateState}/>
-				</Grid>	
 				<Grid item xs = {12} style={{marginRight:"60px"}}>
 					<h2>What does it do?</h2>
 <hr style={{opacity: 0.5, marginBottom: "30px"}}/>

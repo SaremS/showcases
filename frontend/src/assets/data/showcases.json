@@ -1,1 +1,2 @@
-[{"header": "Anomaly Detection", "content": "Detect anomalies in time-series data - e.g. IoT/sensor data.", "image":"anomalies","link": "/anomalies"}]
+[{"header": "Anomaly Detection", "content": "Detect anomalies in time-series data - e.g. IoT/sensor data.", "image":"anomalies","link": "/anomalies"},
+{"header": "Sentiment Streaming", "content": "(Almost) live stream of sentiments of reddit comments in r/news.", "image":"reddit_stream", "link": "/sentiment-streaming"}]

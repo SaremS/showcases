@@ -8,7 +8,8 @@ import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 
 
-const cardImages = {"anomalies": require("../assets/img/anomalies.jpeg")}
+const cardImages = {"anomalies": require("../assets/img/anomalies.png"),
+		    "reddit_stream": require("../assets/img/reddit_stream.png")}
 
 export default function ShowcaseCard({header, content, image, link}) {
   return (

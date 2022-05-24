@@ -8,7 +8,7 @@ const showcases = require('../assets/data/showcases.json');
 
 const showCjson = JSON.parse(JSON.stringify(showcases))
 const showcaseCards = showCjson.map((data)=>{
-	return <Grid item xs = {4} xs = {12}>
+	return <Grid item md = {4} xs = {12}>
 		<ShowcaseCard 
 		header={data.header}
 		content={data.content}
