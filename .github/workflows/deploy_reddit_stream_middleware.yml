@@ -1,4 +1,4 @@
-name: Deploy frontend
+name: Deploy reddit stream middleware
 on:
   push:
     branches:
