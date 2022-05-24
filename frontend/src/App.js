@@ -37,7 +37,14 @@ function App() {
 
   const [sentimentStreamState, setSentimentStreamState] = React.useState([]);
 
-  const socketUrl = "ws://localhost:5432"
+  const REACT_ENV = process.env.REACT_APP_REACT_ENV;
+  var socketUrl = null
+  
+  if (REACT_ENV == "PROD"){
+  	const socketUrl = "wss://api.sarem-seitz.com/sentiment-stream/socket";
+  }else{
+	const socketUrl = "ws://localhost:5432";
+  }
   const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl);
 
   React.useEffect(() => {
