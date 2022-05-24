@@ -3,6 +3,7 @@ import 'react-pro-sidebar/dist/css/styles.css';
 import SsidChartIcon from '@mui/icons-material/SsidChart';
 import HomeIcon from '@mui/icons-material/Home';
 import { Link } from 'react-router-dom';
+import RedditIcon from '@mui/icons-material/Reddit';
 
 export default function ProAppBar({toggled, handleToggleSidebar}){
 
@@ -29,9 +30,13 @@ export default function ProAppBar({toggled, handleToggleSidebar}){
 		    	<MenuItem icon={<SsidChartIcon />}>
 				<Link to="/anomalies">Anomaly Detection</Link>
 			</MenuItem>
-
 		  </Menu>
 
+		  <Menu iconShape="square">
+		    	<MenuItem icon={<RedditIcon />}>
+				<Link to="/sentiment-streaming">Sentiment Streaming</Link>
+			</MenuItem>
+		  </Menu>
 
 		</SidebarContent>
 
