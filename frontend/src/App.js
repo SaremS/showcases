@@ -41,9 +41,9 @@ function App() {
   var socketUrl = null
   
   if (REACT_ENV == "PROD"){
-  	const socketUrl = "wss://api.sarem-seitz.com/sentiment-stream/socket";
+  	socketUrl = "wss://api.sarem-seitz.com/sentiment-stream/socket";
   }else{
-	const socketUrl = "ws://localhost:5432";
+	socketUrl = "ws://localhost:5432";
   }
   const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl);
 
