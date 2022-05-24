@@ -1,0 +1,23 @@
+name: Deploy reddit stream python stream
+on:
+  push:
+    branches:
+    - master
+    paths:
+    - 'reddit-stream/python-stream/**'
+#test
+jobs:
+  deploy:
+    name: "Deploy reddit stream python stream"
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    # needs: test
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.DEPLOY_HOST_2 }}
+        username: ${{ secrets.DEPLOY_USER_2 }}
+        password: ${{ secrets.DEPLOY_KEY_2 }}
+        port: 22
+        script: /root/deploy_python_stream.sh
