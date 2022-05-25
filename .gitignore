@@ -38,3 +38,5 @@ yarn-error.log*
 
 */venv/
 
+*/data_cache.json
+data_cache.json
