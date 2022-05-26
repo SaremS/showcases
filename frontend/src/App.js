@@ -43,7 +43,7 @@ function App() {
   if (REACT_ENV == "PROD"){
   	socketUrl = "wss://api.sarem-seitz.com/sentiment-stream/socket";
   }else{
-	socketUrl = "ws://localhost:5432";
+	socketUrl = "ws://localhost:8765";
   }
   const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl);
 
@@ -52,10 +52,16 @@ function App() {
 	  
     if (lastMessage !== null) {
       const data = lastMessage.data;
-      const parsed = JSON.parse(data.substr(1,data.length-2).replaceAll('\\',''));
-      parsed["time"] = new Date(parsed["timestamp"] * 1000); 
-      setSentimentStreamState((prev) => prev.concat((parsed)));
-    console.log(sentimentStreamState)
+      const parsed = JSON.parse(data);
+      const parsed_with_time = parsed.map(d => Object.assign({}, d, {"time":new Date(d["timestamp"]*1000)}));
+      
+      if (sentimentStreamState.length != parsed_with_time.length){
+      	setSentimentStreamState((prev) => parsed_with_time);
+      }else if ((sentimentStreamState.length != parsed_with_time.length) && (setSentimentStreamState[sentimentStreamState.length-1]!=parsed_with_time[parsed_with_time.length-1])){
+	setSentimentStreamState((prev) => parsed_with_time);
+      }
+
+	
     }
   }, [lastMessage, setSentimentStreamState]);
 
