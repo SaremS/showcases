@@ -26,13 +26,16 @@ export default function TimeSeriesChart({data}){
 			viewWindow: {
 				min: -1.0,
 				max: 1.0
-			}
+			},
+		},
+		chartArea: {
+			width: "80%",
+			height: "80%"
 		}
 	};
 	return(
 		<Chart
 			chartType="LineChart"
-			width="70vw"
 			height="40vh"
 			data={chartData}
 			options={options}

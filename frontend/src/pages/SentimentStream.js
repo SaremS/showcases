@@ -10,16 +10,15 @@ export default function SentimentStream({state,titleSentiment,updateState}){
 	return(
 	<div>
 		<Box sx={{ flexGrow: 1 }}>
-			<h1>Streaming sentiment analysis of comments on r/CryptoCurrency</h1>
+			<h1>Streaming sentiment analysis of comments on r/news</h1>
 			<hr style={{opacity: 0.5, marginBottom: "30px"}}/>
 			<Grid 
 				container 
 				spacing={2}
 				alignItems="center"
 				justifyContent="center"
-				direction="column"
 			>
-				<Grid item xs={12}>
+				<Grid item xs={12} md={12}>
 					<Paper elevation={3}>
 						<TimeSeriesChart
 							data={state.map(x => ({"index": x["time"], "value": x["sentiment_moving_avg"]}))} 
@@ -27,7 +26,6 @@ export default function SentimentStream({state,titleSentiment,updateState}){
 					</Paper>
 				</Grid>
 				<br/>
-				<Grid container spacing={2} style={{minWidth:"70vw"}}>	
 				<Grid item md={4} xs={12}>
 					<TitleSentimentCard header={"Lowest average sentiment"}
 							    title={titleSentiment["min"]["title"]}
@@ -52,7 +50,6 @@ export default function SentimentStream({state,titleSentiment,updateState}){
 							    count={titleSentiment["max"]["count"]}
 							    color={"#66ff7a"}
 					/>	
-				</Grid>
 				</Grid>
 				<Grid item xs = {12} style={{marginRight:"60px"}}>
 					<h2>What does it do?</h2>
