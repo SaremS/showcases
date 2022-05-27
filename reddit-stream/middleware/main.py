@@ -15,19 +15,20 @@ else:
 if "KAFKA_TOPIC" in os.environ:
     KAFKA_TOPIC = os.getenv("KAFKA_TOPIC")
 else:
-    KAFKA_TOPIC = "reddit_praw_sentimented"
+    KAFKA_TOPIC = "reddit_praw"
 
 
 
 class DataCache():
 
-    def __init__(self):
+    def __init__(self, target_topic: str):
         self._cache = deque(maxlen=500)
+        self._full_topic = KAFKA_TOPIC + "_{}".format(target_topic)
         self._load_cache()
         self._update_read = False
 
         self._consumer = KafkaConsumer(
-                KAFKA_TOPIC,
+                self._full_topic,
                 bootstrap_servers=KAFKA_HOST
         )
         self.start_kafka_loop()
@@ -54,7 +55,7 @@ class DataCache():
 
     def _load_cache(self):
         try:
-            with open("data_cache.json","r") as f:
+            with open(self._full_topic + ".json","r") as f:
                 cache = json.load(f)
                 for item in cache:
                     self._cache.append(item)
@@ -63,7 +64,7 @@ class DataCache():
 
 
     def _save_cache(self):
-        with open('data_cache.json', 'w') as f:
+        with open(self._full_topic + ".json", 'w') as f:
             json.dump(self.get_cache_as_list(), f)
 
 
@@ -72,15 +73,18 @@ class DataCache():
 
 
 
-cache = DataCache()
+sentiment_mean_cache = DataCache("_sentimented")
+title_sentiment_cache = DataCache("_aggregated")
 
 
 async def kafka_socket(websocket):
 
     while True:
-        newest = await cache.read()
-        if newest is not None:
-            await websocket.send(json.dumps(newest))
+        newest_sm = await sentiment_mean_cache.read()
+        newest_ts = await title_sentiment_cache.read()
+
+        if newest_sm is not None and newest_ts is not None:
+            await websocket.send(json.dumps({"sentiment_mean": newest_sm, "title_sentiment": newest_ts}))
         await asyncio.sleep(10)
 
 

@@ -16,24 +16,37 @@ object SentimentStreamer{
     val kafkaHost = sys.env.get("KAFKA_HOST").get
 
     val sentimentModel = new SentimentModel(spark, "sentimentdl_use_twitter", "comment_body")
-    val streamTransformer = new StreamTransformer(spark, sentimentModel)
+    val inputTransformer = new InputTransformer(spark, sentimentModel)
+    val sentimentAverageTransformer = new SentimentAverageTransformer(spark)
+    val titleSentAggregationTransformer = new TitleSentAggregationTransformer(spark)
 
-    val streamDf = spark
+    val inputDf = spark
       .readStream
       .format("kafka")
       .option("kafka.bootstrap.servers", kafkaHost)
       .option("subscribe", "reddit_praw")
       .load()
 
-    val transformedStreamDf = streamTransformer.createSentimentAggregateStreamDf(streamDf)
+    val sentimentedDf = inputTransformer.transformStream(inputDf)
+    val sentimentAverageDf = sentimentAverageTransformer.transformStream(sentimentedDf)
+    val titleSentDf = titleSentAggregationTransformer.transformStream(sentimentedDf)
+
     
-    transformedStreamDf
+    sentimentAverageDf
       .writeStream
       .format("kafka")
       .option("kafka.bootstrap.servers", kafkaHost)
       .option("topic", "reddit_praw_sentimented")
       .option("checkpointLocation", "checkpoint/kafka_checkpoint")
       .start()
-      .awaitTermination()
+    
+    titleSentDf
+      .writeStream
+      .format("kafka")
+      .option("kafka.bootstrap.servers", kafkaHost)
+      .option("topic", "reddit_praw_aggregated")
+      .option("checkpointLocation", "checkpoint/kafka_checkpoint")
+      .start()
+
   }
 }
