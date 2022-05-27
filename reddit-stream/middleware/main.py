@@ -87,7 +87,9 @@ class TitleCache():
     async def read(self):
         min_one = self._get_min_from_cache("avg_sentiment")
         max_one = self._get_max_from_cache("avg_sentiment")
-        return {"min": min_one, "max": max_one}
+        count_one = self._get_max_from_cache("count")
+
+        return {"min": min_one, "max": max_one, "countmax": count_one}
    
 
     def start_kafka_loop(self):
