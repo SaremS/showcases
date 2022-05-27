@@ -48,6 +48,6 @@ object SentimentStreamer{
       .option("checkpointLocation", "checkpoint/kafka_checkpoint")
       .start()
     
-    spark.streams.awaitAnyTermination()
+    spark.streams.active.foreach(stream => stream.awaitTermination())
   }
 }
