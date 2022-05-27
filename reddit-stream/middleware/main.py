@@ -104,7 +104,8 @@ class TitleCache():
             self._cache = list(filter(lambda x: x["timestamp"] > data["timestamp"] - 60, self._cache))
             self._cache = [r for r in self._cache if r["title"]!=data["title"]]
             
-            self._cache.append(data)
+            if not "Daily General Discussion" in data["title"]:
+                self._cache.append(data)
             self._save_cache()
 
 
