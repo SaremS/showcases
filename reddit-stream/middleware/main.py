@@ -86,7 +86,7 @@ class TitleCache():
 
     async def read(self):
         min_one = self._get_min_from_cache("avg_sentiment")
-        max_one = self._get_min_from_cache("avg_sentiment")
+        max_one = self._get_max_from_cache("avg_sentiment")
         return {"min": min_one, "max": max_one}
    
 
