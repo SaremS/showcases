@@ -36,9 +36,9 @@ function App() {
   
 
   const [sentimentStreamState, setSentimentStreamState] = React.useState([]);
-  const [titleSentimentState, setTitleSentimentState] = React.useState({"min": {"title":null,"avg_sentiment": null, "count":null},
-  									"max": {"title":null,"avg_sentiment": null, "count":null},
-  									"countmax": {"title":null,"avg_sentiment": null, "count":null}});
+  const [titleSentimentState, setTitleSentimentState] = React.useState({"min": {"title":null,"avg_sentiment": 0.0, "count":null},
+  									"max": {"title":null,"avg_sentiment": 0.0, "count":null},
+  									"countmax": {"title":null,"avg_sentiment": 0.0, "count":null}});
 
   const REACT_ENV = process.env.REACT_APP_REACT_ENV;
   var socketUrl = null
