@@ -47,6 +47,6 @@ object SentimentStreamer{
       .option("topic", "reddit_praw_aggregated")
       .option("checkpointLocation", "checkpoint/kafka_checkpoint")
       .start()
-
+      .awaitTermination()
   }
 }
