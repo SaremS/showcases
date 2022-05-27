@@ -24,6 +24,7 @@ class DataCache():
     def __init__(self, target_topic: str):
         self._cache = deque(maxlen=500)
         self._full_topic = KAFKA_TOPIC + "_{}".format(target_topic)
+        print(self._full_topic)
         self._load_cache()
         self._update_read = False
 
@@ -36,7 +37,6 @@ class DataCache():
 
     async def read(self):
         update = list(self._cache)
-        self._update_read = True
         return update
    
 
@@ -48,6 +48,7 @@ class DataCache():
     def _kafka_consumer_loop(self):
         for message in self._consumer:
             data = json.loads(message.value.decode("utf-8"))
+            print(data)
             self._cache.append(data)
             self._save_cache()
             self._update_read = False
