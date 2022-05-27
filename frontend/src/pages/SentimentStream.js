@@ -10,7 +10,7 @@ export default function SentimentStream({state,titleSentiment,updateState}){
 	return(
 	<div>
 		<Box sx={{ flexGrow: 1 }}>
-			<h1>Streaming sentiment analysis of comments on r/news</h1>
+			<h1>Streaming sentiment analysis of comments on r/CryptoCurrency</h1>
 			<hr style={{opacity: 0.5, marginBottom: "30px"}}/>
 			<Grid 
 				container 
