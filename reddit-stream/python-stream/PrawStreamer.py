@@ -43,8 +43,11 @@ class PrawStreamer():
             sentiment_topic = NewTopic(name=topic_name + "_sentimented",
                              num_partitions=1,
                              replication_factor=1)
+            aggregated_topic = NewTopic(name=topic_name + "_aggregated",
+                             num_partitions=1,
+                             replication_factor=1)
 
-            self.kafka_admin_client.create_topics([topic,sentiment_topic])
+            self.kafka_admin_client.create_topics([topic,sentiment_topic,aggregated_topic])
 
         
 
