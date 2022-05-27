@@ -32,7 +32,7 @@ export default function TimeSeriesChart({data}){
 	return(
 		<Chart
 			chartType="LineChart"
-			minWidth="70vw"
+			width="70vw"
 			height="40vh"
 			data={chartData}
 			options={options}
