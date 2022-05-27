@@ -200,7 +200,7 @@
         "platform": {
             "name": "jvm",
             "config": {
-                "home": "/Library/Java/JavaVirtualMachines/openjdk-11.0.2.jdk/Contents/Home",
+                "home": "/Library/Java/JavaVirtualMachines/jdk-14.jdk/Contents/Home",
                 "options": [
                     "-Duser.dir=/Users/saremseitz/Documents/Projects/Invest/showcases/reddit-stream/sentiment-stream/project"
                 ]

@@ -53,7 +53,11 @@ function App() {
     if (lastMessage !== null) {
       const data = lastMessage.data;
       const parsed = JSON.parse(data);
-      const parsed_with_time = parsed.map(d => Object.assign({}, d, {"time":new Date(d["timestamp"]*1000)}));
+      const sentiment_mean = parsed["sentiment_mean"];
+      const title_sentiment = parsed["title_sentiment"];
+      console.log(title_sentiment);
+
+      const parsed_with_time = sentiment_mean.map(d => Object.assign({}, d, {"time":new Date(d["timestamp"]*1000)}));
       
       if (sentimentStreamState.length !== parsed_with_time.length){
       	setSentimentStreamState((prev) => parsed_with_time);
