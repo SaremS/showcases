@@ -4,8 +4,9 @@ import TimeSeriesChart from '../components/TimeSeriesChart';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import TitleSentimentCard from '../components/TitleSentimentCard';
 
-export default function SentimentStream({state,updateState}){
+export default function SentimentStream({state,titleSentiment,updateState}){
 	return(
 	<div>
 		<Box sx={{ flexGrow: 1 }}>
@@ -25,7 +26,34 @@ export default function SentimentStream({state,updateState}){
 						/>
 					</Paper>
 				</Grid>
-		
+				<br/>
+				<Grid container spacing={2}>	
+				<Grid item md={4} xs={12}>
+					<TitleSentimentCard header={"Lowest average sentiment"}
+							    title={titleSentiment["min"]["title"]}
+							    sentiment={titleSentiment["min"]["avg_sentiment"]}
+							    count={titleSentiment["min"]["count"]}
+							    color={"#fc6a60"}
+					/>	
+				</Grid>
+				<Grid item md={4} xs={12}>
+					<TitleSentimentCard header={"Most comments"}
+
+							    title={titleSentiment["countmax"]["title"]}
+							    sentiment={titleSentiment["countmax"]["avg_sentiment"]}
+							    count={titleSentiment["countmax"]["count"]}
+							    color={"#ffffff"}
+					/>	
+				</Grid>
+				<Grid item md={4} xs={12}>
+					<TitleSentimentCard header={"Highest average sentiment"}
+							    title={titleSentiment["max"]["title"]}
+							    sentiment={titleSentiment["max"]["avg_sentiment"]}
+							    count={titleSentiment["max"]["count"]}
+							    color={"#66ff7a"}
+					/>	
+				</Grid>
+				</Grid>
 				<Grid item xs = {12} style={{marginRight:"60px"}}>
 					<h2>What does it do?</h2>
 <hr style={{opacity: 0.5, marginBottom: "30px"}}/>

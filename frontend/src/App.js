@@ -36,6 +36,9 @@ function App() {
   
 
   const [sentimentStreamState, setSentimentStreamState] = React.useState([]);
+  const [titleSentimentState, setTitleSentimentState] = React.useState({"min": {"title":null,"avg_sentiment": null, "count":null},
+  									"max": {"title":null,"avg_sentiment": null, "count":null},
+  									"countmax": {"title":null,"avg_sentiment": null, "count":null}});
 
   const REACT_ENV = process.env.REACT_APP_REACT_ENV;
   var socketUrl = null
@@ -55,7 +58,8 @@ function App() {
       const parsed = JSON.parse(data);
       const sentiment_mean = parsed["sentiment_mean"];
       const title_sentiment = parsed["title_sentiment"];
-      console.log(title_sentiment);
+      
+      setTitleSentimentState((prev) => title_sentiment);
 
       const parsed_with_time = sentiment_mean.map(d => Object.assign({}, d, {"time":new Date(d["timestamp"]*1000)}));
       
@@ -98,6 +102,7 @@ function App() {
 	  			<Route path="/sentiment-streaming" element={
 					<SentimentStream
 	  					state={sentimentStreamState}
+						titleSentiment={titleSentimentState}
 						updateState={1}
 	  				/>
 				}/>
