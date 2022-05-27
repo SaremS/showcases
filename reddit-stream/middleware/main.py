@@ -101,7 +101,7 @@ class TitleCache():
         for message in self._consumer:
             data = json.loads(message.value.decode("utf-8"))
             
-            self._cache = list(filter(lambda x: x["timestamp"] > data["timestamp"] - 60, self._cache))
+            self._cache = list(filter(lambda x: x["timestamp"] > data["timestamp"] - 300, self._cache))
             self._cache = [r for r in self._cache if r["title"]!=data["title"]]
             
             if not "Daily General Discussion" in data["title"]:
