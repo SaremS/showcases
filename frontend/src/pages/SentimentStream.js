@@ -27,7 +27,7 @@ export default function SentimentStream({state,titleSentiment,updateState}){
 					</Paper>
 				</Grid>
 				<br/>
-				<Grid container spacing={2}>	
+				<Grid container spacing={2} style={{minWidth:"70vw"}}>	
 				<Grid item md={4} xs={12}>
 					<TitleSentimentCard header={"Lowest average sentiment"}
 							    title={titleSentiment["min"]["title"]}

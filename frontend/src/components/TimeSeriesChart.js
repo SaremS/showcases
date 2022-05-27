@@ -14,7 +14,7 @@ export default function TimeSeriesChart({data}){
 	};
 
 	const options = {
-		title: "5 minutes rolling sentiment score",
+		title: "15 minutes rolling sentiment score",
 		curveType: "function",
 		legend: { position: "none" },
 		animation: {
@@ -32,7 +32,7 @@ export default function TimeSeriesChart({data}){
 	return(
 		<Chart
 			chartType="LineChart"
-			width="70vw"
+			minWidth="70vw"
 			height="40vh"
 			data={chartData}
 			options={options}

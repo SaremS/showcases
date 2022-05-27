@@ -42,7 +42,7 @@ class SentimentAverageTransformer(spark: SparkSession) {
 
     val aggregatedStreamDf = sentimentedStreamDf
       .withWatermark("timestamp", "15 seconds")
-      .groupBy(window($"timestamp", "10 minutes", "15 seconds"))
+      .groupBy(window($"timestamp", "15 minutes", "15 seconds"))
       .agg(mean($"sentiment").as("sentiment_moving_avg"), count($"timestamp").as("count"))
       .withColumn("timestamp", unix_timestamp($"window.end"))
 
@@ -63,7 +63,7 @@ class TitleSentAggregationTransformer(spark: SparkSession) {
 
     val aggregatedStreamDf = sentimentedStreamDf
       .withWatermark("timestamp", "15 seconds")
-      .groupBy(window($"timestamp", "10 minutes", "15 seconds"), $"title")
+      .groupBy(window($"timestamp", "15 minutes", "15 seconds"), $"title")
       .agg(mean($"sentiment").as("avg_sentiment"),count($"sentiment").as("count"))
     .filter($"count">3)
     .withColumn("timestamp", unix_timestamp($"window.end"))
