@@ -37,7 +37,7 @@ object SentimentStreamer{
       .format("kafka")
       .option("kafka.bootstrap.servers", kafkaHost)
       .option("topic", "reddit_praw_sentimented")
-      .option("checkpointLocation", "checkpoint/kafka_checkpoint")
+      .option("checkpointLocation", "checkpoint/kafka_checkpoint/mean_sentiment")
       .start()
     
     titleSentDf
@@ -45,7 +45,7 @@ object SentimentStreamer{
       .format("kafka")
       .option("kafka.bootstrap.servers", kafkaHost)
       .option("topic", "reddit_praw_aggregated")
-      .option("checkpointLocation", "checkpoint/kafka_checkpoint")
+      .option("checkpointLocation", "checkpoint/kafka_checkpoint/title_sentiment")
       .start()
     
     spark.streams.active.foreach(stream => stream.awaitTermination())
