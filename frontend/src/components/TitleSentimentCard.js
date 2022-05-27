@@ -16,6 +16,8 @@ const bull = (
 );
 
 export default function TitleSentimentCard({header, title, sentiment, count, color}) {
+  const minSentimentRound = Math.round(sentiment,4)
+
   return (
     <Card sx={{ minHeight: 150}} style={{backgroundColor: color}}>
       <CardContent>
@@ -29,7 +31,7 @@ export default function TitleSentimentCard({header, title, sentiment, count, col
           Average Sentiment
         </Typography>
         <Typography variant="body1">
-	  Math.round({sentiment},4)
+	  {minSentimentRound}
         </Typography>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Comment Count
