@@ -22,19 +22,19 @@ export default function TitleSentimentCard({header, title, sentiment, count, col
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
 	  {header}
         </Typography>
-        <Typography variant="h3" component="div">
+        <Typography variant="body1" component="div">
 	  {title}
         </Typography>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Average Sentiment
         </Typography>
-        <Typography variant="body2">
-	  {sentiment}
+        <Typography variant="body1">
+	  Math.round({sentiment},4)
         </Typography>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Comment Count
         </Typography>
-	<Typography variant="body2">
+	<Typography variant="body1">
 	  {count}
         </Typography>
       </CardContent>
