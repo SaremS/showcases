@@ -24,7 +24,6 @@ class DataCache():
     def __init__(self, target_topic: str):
         self._cache = deque(maxlen=500)
         self._full_topic = KAFKA_TOPIC + "_{}".format(target_topic)
-        print(self._full_topic)
         self._load_cache()
         self._update_read = False
 
@@ -48,7 +47,6 @@ class DataCache():
     def _kafka_consumer_loop(self):
         for message in self._consumer:
             data = json.loads(message.value.decode("utf-8"))
-            print(data)
             self._cache.append(data)
             self._save_cache()
             self._update_read = False
@@ -74,8 +72,8 @@ class DataCache():
 
 
 
-sentiment_mean_cache = DataCache("_sentimented")
-title_sentiment_cache = DataCache("_aggregated")
+sentiment_mean_cache = DataCache("sentimented")
+title_sentiment_cache = DataCache("aggregated")
 
 
 async def kafka_socket(websocket):
