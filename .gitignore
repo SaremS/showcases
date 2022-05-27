@@ -19,24 +19,24 @@
 .env.production.local
 
 .env
-*/.env
+**/.env
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-*/target/
-*/checkpoint/
+**/target/
+**/checkpoint/
 
-*/__pycache__/
+**/__pycache__/
 
-*/target/
-*/cache_pretrained/
-*/.bloop
-*/.metals/
+**/target/
+**/cache_pretrained/
+**/.bloop
+**/.metals/
 */.metals
 
-*/venv/
+**/venv/
 
 **/data_cache.json
 data_cache.json

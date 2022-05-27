@@ -55,8 +55,9 @@ class PrawStreamer():
         for comment in subreddit.stream.comments(skip_existing=True):
             created_utc = int(comment.created_utc)
             comment_body = comment.body
+            title = comment.submission.title
 
-            comment_dict = {"created_utc":created_utc, "comment_body": comment_body}
+            comment_dict = {"created_utc":created_utc, "comment_body": comment_body, "title": title}
 
             self.kafka_producer.send(self.kafka_target_topic, comment_dict)
               
