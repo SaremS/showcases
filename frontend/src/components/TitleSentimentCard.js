@@ -16,10 +16,10 @@ const bull = (
 );
 
 export default function TitleSentimentCard({header, title, sentiment, count, color}) {
-  const minSentimentRound = Math.round(sentiment,4)
+  const minSentimentRound = sentiment.toFixed(4);
 
   return (
-    <Card sx={{ minHeight: 150}} style={{backgroundColor: color}}>
+    <Card sx={{ minHeight: 175}} style={{backgroundColor: color}}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
 	  {header}
