@@ -6,6 +6,8 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import TitleSentimentCard from '../components/TitleSentimentCard';
 
+const explainImg = require("../assets/img/sentiment-stream-img.jpg")
+
 export default function SentimentStream({state,titleSentiment,updateState}){
 	return(
 	<div>
@@ -52,11 +54,8 @@ export default function SentimentStream({state,titleSentiment,updateState}){
 					/>	
 				</Grid>
 				<Grid item xs = {12} style={{marginRight:"60px"}}>
-					<h2>What does it do?</h2>
-<hr style={{opacity: 0.5, marginBottom: "30px"}}/>
-					<h2>How does it work?</h2>
-<hr style={{opacity: 0.5, marginBottom: "30px"}}/>
-				<h2>How do I use it?</h2>
+				<h2>How does it work?</h2>
+				<img src={explainImg} style={{width: "50%", height:"50%"}}/>
 		</Grid>
 
 

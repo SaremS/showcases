@@ -65,7 +65,7 @@ class TitleSentAggregationTransformer(spark: SparkSession) {
       .withWatermark("timestamp", "15 seconds")
       .groupBy(window($"timestamp", "15 minutes", "15 seconds"), $"title")
       .agg(mean($"sentiment").as("avg_sentiment"),count($"sentiment").as("count"))
-    .filter($"count">10)
+      .filter($"count">=5)
     .withColumn("timestamp", unix_timestamp($"window.end"))
 
     val outputStreamDf = aggregatedStreamDf
