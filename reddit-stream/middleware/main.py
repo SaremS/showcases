@@ -101,7 +101,7 @@ class TitleCache():
         for message in self._consumer:
             data = json.loads(message.value.decode("utf-8"))
             
-            self._cache = list(filter(lambda x: x["timestamp"] > data["timestamp"] - 60, self._cache))
+            self._cache = list(filter(lambda x: x["timestamp"] > data["timestamp"] - 30, self._cache))
             
             self._cache.append(data)
             self._save_cache()
