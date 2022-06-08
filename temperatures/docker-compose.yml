@@ -1,8 +1,8 @@
 version: '3'
 
 networks:
-  middleware-network:
-    driver: bridge
+  reddit-stream_middleware-network:
+    external: true
 
 
 services:
@@ -13,7 +13,7 @@ services:
       context: ./middleware
       dockerfile: Dockerfile
     networks:
-      - middleware-network
+      - reddit-stream_middleware-network
     env_file: ./middleware/.env
     restart: on-failure
     ports:
