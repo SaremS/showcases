@@ -1,0 +1,20 @@
+version: '3'
+
+networks:
+  middleware-network:
+    driver: bridge
+
+
+services:
+
+  temperature_middleware:
+    container_name: temperature_middleware
+    build:
+      context: ./middleware
+      dockerfile: Dockerfile
+    networks:
+      - middleware-network
+    env_file: ./middleware/.env
+    restart: on-failure
+    ports:
+      - "8764:8764"
