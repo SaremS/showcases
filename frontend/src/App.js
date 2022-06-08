@@ -4,6 +4,7 @@ import MyAppBar from './components/MyAppBar';
 import ProAppBar from './components/ProAppBar';
 import Anomalies from './pages/Anomalies';
 import SentimentStream from './pages/SentimentStream';
+import Temperatures from './pages/Temperatures';
 import Home from './pages/Home';
 import * as React from 'react';
 import './styles/App.scss';
@@ -105,6 +106,10 @@ function App() {
 						titleSentiment={titleSentimentState}
 						updateState={1}
 	  				/>
+				}/>
+	  			
+	  			<Route path="/temperatures" element={
+					<Temperatures REACT_ENV={REACT_ENV}/>
 				}/>
 
 	  		</Routes>
