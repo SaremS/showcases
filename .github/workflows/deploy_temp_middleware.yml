@@ -1,0 +1,23 @@
+name: Deploy temperatures middleware
+on:
+  push:
+    branches:
+    - master
+    paths:
+    - 'temperatures/middleware/**'
+#test
+jobs:
+  deploy:
+    name: "Deploy temperatures middleware"
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    # needs: test
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.DEPLOY_HOST_2 }}
+        username: ${{ secrets.DEPLOY_USER_2 }}
+        password: ${{ secrets.DEPLOY_KEY_2 }}
+        port: 22
+        script: /root/deploy_temp_middleware.sh
