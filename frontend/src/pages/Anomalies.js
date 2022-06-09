@@ -41,7 +41,6 @@ export default function AnomalyDetection({state,updateState}){
 <hr style={{opacity: 0.5, marginBottom: "30px"}}/>
 				<h2>How do I use it?</h2>
 				<p>Just upload your time-series as a .csv file by clicking the <b>Upload</b> button. The file should have a single column where each observation is stored in a new row (exporting a single-column Excel sheet as a .csv file should give you the correct format). The data is then sent to the model server which fits the model on your data and returns the probability of each observation being an anomaly. </p>
-				<p><b>The data is only used for model training and anomaly detection - no data gets stored anywhere</b></p>
 	<p>Unless the model server has to handle many requests in parallel, you should be able to get quick results if your dataset has a low 5-digit number of observations.</p>
 		</Grid>
 
