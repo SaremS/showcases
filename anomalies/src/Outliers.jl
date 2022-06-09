@@ -27,12 +27,6 @@ function fit_map(::Type{<:Normal}, observations, responsibilities)
 end
 
 
-function getCorsHeaders()
-
-
-
-end
-
 function handlePreflight(req::HTTP.Request)
 	
 
