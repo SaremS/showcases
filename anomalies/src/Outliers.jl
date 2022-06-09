@@ -64,13 +64,11 @@ function handlePreflight(req::HTTP.Request)
 end
 
 function handleData(req::HTTP.Request)
-	println("Received stuff")
 	
 	timeSeries = JSON3.read(IOBuffer(HTTP.payload(req)), TimeSeries)
 	
 	vals = timeSeries.values
 
-	println(vals)
 	valsNormed = (vals .- mean(vals))./std(vals)
 
 	hmm = HMM([0.5 0.5; 0.5 0.5], [Normal(-1,3),Normal(1,3)])
