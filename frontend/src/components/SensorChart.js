@@ -17,7 +17,6 @@ export default function SensorChart({data}){
 		title: "Live measurements temperature",
 		curveType: "function",
 		legend: { position: "none" },
-		colors: ["red"],
 		animation: {
 			duration: 500,
 			easing: "out",
@@ -25,8 +24,8 @@ export default function SensorChart({data}){
 		},
 		vAxis: {
 			viewWindow: {
-				min: -10.0,
-				max: 35.0
+				min: 0.0,
+				max: 100.0
 			},
 		},
 		chartArea: {
