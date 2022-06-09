@@ -53,7 +53,7 @@ export default function Temperatures({ REACT_ENV }){
 				<Grid item xs={12} md={12}>
 					<Paper elevation={3}>
 						<SensorChart
-							data={state.map(x => ({"index": x["time"], "value": x["temperature"]}))} 
+							data={state.map(x => ({"index": x["time"], "value": x["humidity"]}))} 
 						/>
 					</Paper>
 				</Grid>
