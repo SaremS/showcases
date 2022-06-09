@@ -58,7 +58,7 @@ function handlePreflight(req::HTTP.Request)
 end
 
 function handleData(req::HTTP.Request)
-	
+	println("Received some data")
 	timeSeries = JSON3.read(IOBuffer(HTTP.payload(req)), TimeSeries)
 	
 	vals = timeSeries.values
